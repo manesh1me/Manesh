@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Memories for Hema</title>
+    
+    <style>
+        body {
+            background-color: #ffe5ec; /* Soft Pink Background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .album-container {
+            perspective: 1500px;
+        }
+
+        .book {
+            width: 320px;
+            height: 450px;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .page {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: white;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            backface-visibility: hidden;
+            transform-origin: left;
+            transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+            padding: 15px;
+            box-sizing: border-box;
+            border-radius: 0 15px 15px 0;
+            cursor: pointer;
+        }
+
+        .cover {
+            background: linear-gradient(135deg, #ff4d6d, #ff85a1);
+            color: white;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .page img {
+            width: 100%;
+            height: 80%;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 5px solid #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .caption {
+            margin-top: 15px;
+            font-size: 1rem;
+            color: #d81b60;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .flipped {
+            transform: rotateY(-160deg);
+        }
+
+        h1 { margin-bottom: 0; }
+        p { font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <div class="album-container">
+        <div class="book">
+            
+            <div class="page cover">
+                <h1>Hema sahu ✨</h1>
+                <p>Specially for You</p>
+                <small>Tap to Flip Pages</small>
+            </div>
+
+            <div class="page">
+                <img src="photo1.jpg" alt="Photo 1">
+                <p class="caption">Pehli Mulakat ❤️</p>
+            </div>
+
+            <div class="page">
+                <img src="photo2.jpg" alt="Photo 2">
+                <p class="caption">Wo Pyari si Smile 😊</p>
+            </div>
+
+            <div class="page">
+                <img src="photo3.jpg" alt="Photo 3">
+                <p class="caption">Behtareen Pal ✨</p>
+            </div>
+
+            <div class="page">
+                <img src="photo4.jpg" alt="Photo 4">
+                <p class="caption">Hamesha Yaadgaar 🌸</p>
+            </div>
+
+            <div class="page">
+                <img src="photo5.jpg" alt="Photo 5">
+                <p class="caption">Sabse Khaas Moment 💖</p>
+            </div>
+
+            <div class="page" style="background: #fff0f3;">
+                <h2 style="color: #ff4d6d;">The End</h2>
+                <p>Umeed hai aapko pasand aaya!</p>
+                <p><b>- Mamesh verma</b></p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const pages = document.querySelectorAll('.page');
+        
+        pages.forEach((page, index) => {
+            // Pages ko stack mein lagana
+            page.style.zIndex = pages.length - index;
+
+            page.addEventListener('click', function() {
+                if (index < pages.length - 1) {
+                    if (!this.classList.contains('flipped')) {
+                        this.classList.add('flipped');
+                        setTimeout(() => {
+                            this.style.zIndex = index;
+                        }, 600);
+                    } else {
+                        this.classList.remove('flipped');
+                        setTimeout(() => {
+                            this.style.zIndex = pages.length - index;
+                        }, 600);
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
